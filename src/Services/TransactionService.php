@@ -3,12 +3,12 @@
 namespace App\Services;
 
 use App\Entity\Crypto;
-
+use App\Entity\Transaction;
 use App\Form\TransactionType;
 use App\Repository\CryptoRepository;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
+
 use phpDocumentor\Reflection\Types\Float_;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,8 @@ class TransactionService
 
                     'query' => [
                         'limit' => 10,
-                        'convert' => 'EUR'
+                        'convert' => 'EUR',
+
                     ]
 
 
@@ -41,26 +42,32 @@ class TransactionService
     }
 
     /* persistence pour la table crypto en fonction des données de l'API*/
-    /*public function injection_Crypto()
+    public function injection_Crypto(EntityManagerInterface $em)
     {
-
-
-        /*$em = $this->em;
-        /*$params = $this->client->toArray()["data"];
-        foreach ($params as $cryptoApi) {
-
-            $crypto = new Crypto();
-            $crypto->setName($cryptoApi["symbol"] . " " . $cryptoApi["name"]);
-            $crypto->setPrice($cryptoApi["quote"]["EUR"]["price"]);
-            $em->persist($crypto);
-            $em->flush();
-        
-    }*/
+    }
 
 
 
     public function injection_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
+
+
+
+        $params = $this->client->toArray()["data"];
+
+
+
+        foreach ($params as $cryptoApi) {
+
+
+            $crypto = $em->getRepository(Crypto::class)->findOneBy([
+                "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
+            ]);
+            $crypto->setPrice($cryptoApi['quote']['EUR']['price']);
+
+            $em->flush();
+        }
+
 
 
 
