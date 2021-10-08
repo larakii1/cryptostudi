@@ -1,0 +1,71 @@
+<html>
+	<head>
+		<title>Transaction</title>
+		<meta charset="utf-8"/>
+		<link rel="styleshet" type="text/css" href="../transaction/stylesheet.css"/>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+	</head>
+	<body>
+		{% block style %}
+			<style>
+				h1 {}
+				.transaction {
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					margin-top: 3%
+				}
+			</style>
+		{% endblock %}
+		<nav class="navbar navbar-expand-lg navbar-dark bg-black">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">CryptoStudi</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-link active" aria-current="page" href="https://localhost:8000">Accueil</a>
+						<a class="nav-link" href="https://localhost:8000/transaction">Transaction</a>
+						<a class="nav-link" href="#">Gain</a>
+						<a class="nav-link disabled">Vendre</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<div class="transaction">
+			<h1>Ajouter une transaction</h1>
+		</div>
+		{{form_start(formView)}}
+		<div class="form-group">
+			{{form_row(formView.crypto_id)}}
+		</div>
+		<div class="form-group">
+
+			{{form_widget(formView.quantity,{'attr':{
+				'class':'form-control',
+				'placeholder':'quantity'
+			}})}}
+
+			<p>{{form_errors(formView.quantity)}}</p>
+		</div>
+
+		<div class="form-group">
+
+			{{form_widget(formView.price,{'attr':{
+				'class':'form-control',
+				'placeholder':'price',
+				'required':false,
+				
+			}})}}
+			{{form_errors(formView.price)}}
+		</div>
+
+
+		{{form_end(formView)}}
+
+
+	</body>
+</html>
