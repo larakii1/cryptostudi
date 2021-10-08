@@ -3,8 +3,8 @@
 namespace App\Services;
 
 use App\Entity\Crypto;
-use App\Entity\TransactionCrypto;
-use App\Form\TransactionCryptoType;
+
+use App\Form\TransactionType;
 use App\Repository\CryptoRepository;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -64,13 +64,13 @@ class TransactionService
 
 
 
-        $builder = $factory->createBuilder(TransactionCryptoType::class);
+        $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
         $form->handleRequest($request);
         $transaction = $form->getData();
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
 
             $em->persist($transaction);
             $em->flush();

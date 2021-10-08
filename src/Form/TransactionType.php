@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\TransactionCrypto;
+use App\Entity\Transaction;
 use App\Entity\Crypto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class TransactionCryptoType extends AbstractType
+class TransactionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,7 +19,7 @@ class TransactionCryptoType extends AbstractType
 
 
             ->add(
-                'crypto_id',
+                'crypto',
                 EntityType::class,
                 [
                     'attr' => ['class' => 'form-select form-select-md mb-3'],
@@ -59,7 +59,7 @@ class TransactionCryptoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => TransactionCrypto::class,
+            'data_class' => Transaction::class,
         ]);
     }
 }
