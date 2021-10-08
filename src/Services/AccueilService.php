@@ -2,20 +2,21 @@
 
 namespace App\Services;
 
-use App\Repository\TransactionRepository;
+use App\Repository\Crypto;
+use App\Repository\CryptoRepository;
 
 class AccueilService
 {
-    private $transactionRepository;
+    private $cryptoRepository;
 
-    public function __construct(TransactionRepository $transactionRepository)
+    public function __construct(CryptoRepository $cryptoRepository)
     {
-        $this->transactionRepository = $transactionRepository;
+        $this->cryptoRepository = $cryptoRepository;
     }
 
     public function transactionWallet()
     {
-        $transactionpository = $this->transactionRepository;
-        return $transactionpository->findAll();
+        $cryptoRepository = $this->cryptoRepository;
+        return $cryptoRepository->findAll();
     }
 }

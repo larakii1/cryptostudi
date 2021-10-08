@@ -45,21 +45,14 @@ class TransactionService
     public function injection_Crypto(EntityManagerInterface $em)
     {
     }
-
-
-
     public function injection_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
 
 
 
+
         $params = $this->client->toArray()["data"];
-
-
-
         foreach ($params as $cryptoApi) {
-
-
             $crypto = $em->getRepository(Crypto::class)->findOneBy([
                 "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
             ]);
@@ -77,9 +70,15 @@ class TransactionService
         $form->handleRequest($request);
         $transaction = $form->getData();
 
+
+
+
         if ($form->isSubmitted()) {
 
+            $crypto = $form->get('crypto')->getData();
+            $crypto->setQuantity($crypto->getQuantity() + $form->get('quantity')->getData());
             $em->persist($transaction);
+            $em->persist($crypto);
             $em->flush();
         }
 

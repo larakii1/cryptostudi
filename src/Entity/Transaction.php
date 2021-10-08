@@ -18,8 +18,8 @@ class Transaction
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity=Crypto::class, cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity=Crypto::class,inversedBy="transactions", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $crypto;
 
@@ -38,7 +38,7 @@ class Transaction
         return $this->crypto;
     }
 
-    public function setCrypto(Crypto $crypto)
+    public function setCrypto(Crypto $crypto): ?self
     {
         $this->crypto = $crypto;
 
@@ -56,6 +56,7 @@ class Transaction
 
         return $this;
     }
+
 
     public function __toString()
     {
