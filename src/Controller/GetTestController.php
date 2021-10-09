@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Crypto;
+use App\Services\AccueilService;
 use App\Services\TransactionService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,18 +17,21 @@ use Doctrine\Persistence\ObjectManager as PersistenceObjectManager;
 
 class GetTestController extends AbstractController
 {
-
-    public function index(): Response
+    #[Route('/blabla', name: 'get_testa')]
+    public function index(AccueilService $accueilService)
     {
-        return $this->render('get_test/index.html.twig', [
-            'controller_name' => 'GetTestController',
+        $transaction_wallet =  $accueilService->transactionWallet();
+        return $this->render('accueil/index.html.twig', [
+            'controller_name' => 'AccueilController',
+            'transac' => $transaction_wallet
+
         ]);
     }
 
-    #[Route('/get/test', name: 'get_test')]
+    #[Route('/testc', name: 'get_test')]
     public function getApi(TransactionService $trs, EntityManagerInterface $em)
     {
-        $vars = $trs->injection_Crypto($em);
+        $vars = $trs->getTotalPrice($em);
 
         return $vars;
     }

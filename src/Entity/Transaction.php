@@ -38,7 +38,7 @@ class Transaction
         return $this->crypto;
     }
 
-    public function setCrypto(Crypto $crypto): ?self
+    public function setCrypto(?Crypto $crypto): ?self
     {
         $this->crypto = $crypto;
 

@@ -77,7 +77,10 @@ class Crypto
 
 
 
-
+    public function getTotalPrice()
+    {
+        return $this->quantity;
+    }
 
 
 
@@ -132,6 +135,6 @@ class Crypto
 
     public function __toString()
     {
-        return $this->name . ' ' . $this->quantity . ' ' . $this->quantity * $this->price . ' ' . ' euro';
+        return $this->name . ' ' . $this->quantity . ' ' . $this->quantity > 0 ? $this->name . " " . $this->quantity . ' ' . $this->quantity * round($this->price, 2) . ' ' . ' €' : $this->name;
     }
 }
