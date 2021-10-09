@@ -5,9 +5,19 @@
 	<head>
 		<title>Accueil</title>
 	</head>
+
+	<style>
+		h1 {
+			text-align: center;
+		}
+	</style>
 	<body>
 
-		<h1>Solde :
+		<h1>
+			{% for prices in price %}
+				{{prices}}
+			{% endfor %}
+			€
 		</h1>
 
 		<ul class="list-group list-group-flush">
@@ -15,7 +25,9 @@
 				<li class="list-group-item">{{transacs}}</li>
 			{% endfor %}
 		</ul>
-
+		<script>
+			alert("hello");
+		</script>
 	</body>
 
 </html>

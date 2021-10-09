@@ -75,22 +75,10 @@ class Crypto
         return $this;
     }
 
-
-
-    public function getTotalPrice()
-    {
-        return $this->quantity;
-    }
-
-
-
-
     public function getTransaction(): Collection
     {
         return $this->transactions;
     }
-
-
 
 
 

@@ -19,6 +19,18 @@ class CryptoRepository extends ServiceEntityRepository
         parent::__construct($registry, Crypto::class);
     }
 
+    public function getTotalPrice()
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+        $price = ' SELECT sum(quantity * price) FROM crypto ';
+        $stmt = $conn->prepare($price);
+        $stmt->executeQuery();
+        return $stmt->fetchAll();
+    }
+
+
+
     // /**
     //  * @return Crypto[] Returns an array of Crypto objects
     //  */

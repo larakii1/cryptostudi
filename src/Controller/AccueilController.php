@@ -16,10 +16,12 @@ class AccueilController extends AbstractController
     #[Route('/', name: 'accueil')]
     public function index(AccueilService $accueilService)
     {
+        $price = $accueilService->totalPrice();
         $transaction_wallet =  $accueilService->transactionWallet();
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
-            'transac' => $transaction_wallet
+            'transac' => $transaction_wallet,
+            'price' => $price
 
         ]);
     }
