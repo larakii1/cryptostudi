@@ -34,6 +34,6 @@ class TransactionController extends AbstractController
     #[Route('/vente', name: 'vente')]
     public function transaction_Vente()
     {
-        dd('en cours de configuration ...');
+        return $this->render('transaction/vente.html.twig');
     }
 }

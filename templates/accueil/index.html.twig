@@ -19,15 +19,43 @@
 			{% endfor %}
 			€
 		</h1>
+		<div class="form-group md">
+			<ul class="list-group list-group-flush">
+				{% for transacs in transac %}
+					<li class="list-group-item">{{transacs}}</li>
+				{% endfor %}
+			</ul>
 
-		<ul class="list-group list-group-flush">
-			{% for transacs in transac %}
-				<li class="list-group-item">{{transacs}}</li>
-			{% endfor %}
-		</ul>
-		<script>
-			alert("hello");
-		</script>
-	</body>
+		</div>
+		<button id="ajaxButton">Ajax</button>
+		<script>/*
+			(function () {
+var httpRequest;
+document.getElementById("ajaxButton").addEventListener('click', makeRequest);
 
-</html>
+function makeRequest() {
+httpRequest = new XMLHttpRequest();
+
+if (! httpRequest) {
+alert('Abandon :( Impossible de créer une instance de XMLHTTP');
+return false;
+}
+
+httpRequest.onreadystatechange = alertContents;
+httpRequest.open('GET', 'https://localhost:8000/transaction');
+httpRequest.send();
+}
+
+function alertContents() {
+if (httpRequest.readyState === XMLHttpRequest.DONE) {
+if (httpRequest.status === 200) {
+alert(httpRequest.responseText);
+} else {
+alert('Il y a eu un problème avec la requête.');
+}
+}
+}
+})();*/</script>
+
+
+</body></html>

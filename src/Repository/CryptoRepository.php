@@ -23,7 +23,7 @@ class CryptoRepository extends ServiceEntityRepository
     {
 
         $conn = $this->getEntityManager()->getConnection();
-        $price = ' SELECT sum(quantity * price) FROM crypto ';
+        $price = ' SELECT round(sum(quantity * price)) FROM crypto ';
         $stmt = $conn->prepare($price);
         $stmt->executeQuery();
         return $stmt->fetchAll();
