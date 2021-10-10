@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entity\Crypto;
+use App\Entity\PriceVariation;
 use App\Entity\Transaction;
 use App\Form\TransactionType;
 use App\Form\TransactionDeleteType;
@@ -52,7 +53,7 @@ class TransactionService
 
 
 
-        $params = $this->client->toArray()["data"];
+        /* $params = $this->client->toArray()["data"];
         foreach ($params as $cryptoApi) {
             $crypto = $em->getRepository(Crypto::class)->findOneBy([
                 "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
@@ -60,7 +61,14 @@ class TransactionService
             $crypto->setPrice($cryptoApi['quote']['EUR']['price']);
 
             $em->flush();
-        }
+
+            $variation = new PriceVariation;
+            $variation->setCrypto($crypto);
+            $variation->setPrice($cryptoApi['quote']['EUR']['price']);
+            $variation->setDate(new \DateTime());
+            $em->persist($variation);
+            $em->flush();
+        }*/
 
 
 
