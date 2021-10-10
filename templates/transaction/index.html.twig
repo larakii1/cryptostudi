@@ -16,6 +16,7 @@
 					align-items: center;
 					margin-top: 3%
 				}
+				.ba {}
 			</style>
 		{% endblock %}
 		<nav class="navbar navbar-expand-lg navbar-dark bg-black">
@@ -63,9 +64,26 @@
 			{{form_errors(formView.price)}}
 		</div>
 
+		<div class="forma">
+
+			{{form_widget(formView.ajouter,{'attr':{
+				'class':"btn btn-primary"
+				
+			}})}}
+
+		</div>
 
 		{{form_end(formView)}}
 
 
+		<input type="text" id="demo">
+		<button id="bala">hello</button>
+		{% block javascript %}
+			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+			<script>
+
+				alert("haaaa");
+			</script>
+		{% endblock %}
 	</body>
 </html>

@@ -32,8 +32,11 @@ class TransactionController extends AbstractController
 
 
     #[Route('/vente', name: 'vente')]
-    public function transaction_Vente()
+    public function transaction_Vente(TransactionService $transactionService, Request $request, EntityManagerInterface $em, FormFactoryInterface $factory, ValidatorInterface $validator, CryptoRepository $cr)
     {
-        return $this->render('transaction/vente.html.twig');
+        return $this->render('transaction/vente.html.twig', [
+            'formView' => $transactionService->delete_Transaction($factory, $em, $request, $validator, $cr)
+
+        ]);
     }
 }

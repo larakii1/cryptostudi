@@ -50,9 +50,7 @@ class TransactionType extends AbstractType
             ->add(
                 'ajouter',
                 SubmitType::class,
-                [
-                    "attr" => ['class' => "btn btn-primary"]
-                ]
+                []
             );
     }
 
