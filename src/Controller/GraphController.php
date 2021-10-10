@@ -20,7 +20,7 @@ class GraphController extends AbstractController
             'datasets' => [
                 [
                     'label' => 'My First dataset',
-                    'backgroundColor' => 'rgb(255, 99, 132)',
+                    'backgroundColor' => 'rgb(31,195,108)',
                     'borderColor' => 'rgb(255, 99, 132)',
 
                 ],
