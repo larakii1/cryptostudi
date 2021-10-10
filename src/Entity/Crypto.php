@@ -39,11 +39,17 @@ class Crypto
      */
     private $quantity;
 
+    /**
+     * @ORM\OneToMany(targetEntity=PriceVariation::class, mappedBy="crypto")
+     */
+    private $priceVariations;
+
 
 
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
+        $this->priceVariations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,5 +130,35 @@ class Crypto
     public function __toString()
     {
         return $this->name . ' ' . $this->quantity . ' ' . $this->quantity > 0 ? $this->name . " " . $this->quantity . ' ' . $this->quantity * round($this->price, 2) . ' ' . ' €' : $this->name;
+    }
+
+    /**
+     * @return Collection|PriceVariation[]
+     */
+    public function getPriceVariations(): Collection
+    {
+        return $this->priceVariations;
+    }
+
+    public function addPriceVariation(PriceVariation $priceVariation): self
+    {
+        if (!$this->priceVariations->contains($priceVariation)) {
+            $this->priceVariations[] = $priceVariation;
+            $priceVariation->setCrypto($this);
+        }
+
+        return $this;
+    }
+
+    public function removePriceVariation(PriceVariation $priceVariation): self
+    {
+        if ($this->priceVariations->removeElement($priceVariation)) {
+            // set the owning side to null (unless already changed)
+            if ($priceVariation->getCrypto() === $this) {
+                $priceVariation->setCrypto(null);
+            }
+        }
+
+        return $this;
     }
 }

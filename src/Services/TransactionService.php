@@ -53,7 +53,6 @@ class TransactionService
 
 
         $params = $this->client->toArray()["data"];
-        dump($params);
         foreach ($params as $cryptoApi) {
             $crypto = $em->getRepository(Crypto::class)->findOneBy([
                 "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
