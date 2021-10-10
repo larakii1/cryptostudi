@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class TransactionType extends AbstractType
+class TransactionDeleteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,10 +22,10 @@ class TransactionType extends AbstractType
                 'crypto',
                 EntityType::class,
                 [
-                    'attr' => ['class' => 'form-select form-select-lg mb-3'],
+                    'attr' => ['class' => 'form-select form-select-lg'],
                     'class' => Crypto::class,
                     'choice_label' => function (Crypto $crypto) {
-                        return $crypto->getName();
+                        return $crypto->getName() . " " . $crypto->getQuantity();
                     },
 
                 ]
@@ -35,24 +35,10 @@ class TransactionType extends AbstractType
                 TextType::class,
                 []
             )
-
-            ->add(
-                'price',
-
-
-                null,
-                [
-
-                    'mapped' => false,
-                ],
-
-            )
             ->add(
                 'ajouter',
                 SubmitType::class,
-                [
-                    "attr" => ['class' => "btn btn-primary"]
-                ]
+                []
             );
     }
 

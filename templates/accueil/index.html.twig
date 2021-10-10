@@ -9,22 +9,44 @@
 	<style>
 		h1 {
 			text-align: center;
+			color: rgb(239, 239, 239);
+		}
+
+		.list-group-item {
+			background-color: rgb(16, 15, 15);
+			border-bottom: solid grey;
+			color: white;
+		}
+
+		body {
+			background-color: rgb(16, 15, 15)
+		}
+
+		.back {
+			background-color: red;
+			height: 150px;
+			width: 100%;
 		}
 	</style>
 	<body>
+		<div class="back">
 
-		<h1>
-			{% for prices in price %}
-				{{prices}}
-			{% endfor %}
-			€
-		</h1>
-		<div class="form-group md">
-			<ul class="list-group list-group-flush">
+			<h1>
+				{% for prices in price %}
+					{{prices}}
+				{% endfor %}
+				€
+			</h1>
+		</div>
+
+
+		<div class="form-group md col-lg-4 offset-lg-4">
+			<ul class="list-group list-group-flush-lg">
 				{% for transacs in transac %}
-					<li class="list-group-item">{{transacs}}</li>
+					<li class="list-group-item ">{{transacs}}</li>
 				{% endfor %}
 			</ul>
 		</div>
+
 	</body>
 </html>

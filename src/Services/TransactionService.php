@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\Crypto;
 use App\Entity\Transaction;
 use App\Form\TransactionType;
+use App\Form\TransactionDeleteType;
 use App\Repository\CryptoRepository;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,6 +36,7 @@ class TransactionService
                         'limit' => 10,
                         'convert' => 'EUR',
 
+
                     ]
 
 
@@ -51,6 +53,7 @@ class TransactionService
 
 
         $params = $this->client->toArray()["data"];
+        dump($params);
         foreach ($params as $cryptoApi) {
             $crypto = $em->getRepository(Crypto::class)->findOneBy([
                 "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
@@ -98,7 +101,7 @@ class TransactionService
 
     public function delete_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
-        $builder = $factory->createBuilder(TransactionType::class);
+        $builder = $factory->createBuilder(TransactionDeleteType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
         $form->handleRequest($request);
