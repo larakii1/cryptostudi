@@ -31,8 +31,8 @@ class GetTestController extends AbstractController
     #[Route('/testc', name: 'get_test')]
     public function getApi(TransactionService $trs, EntityManagerInterface $em, AccueilService $accueilService)
     {
-        $vars = $accueilService->totalPrice();
+        $varss = $accueilService->totalPrice();
 
-        echo $vars;
+        echo $varss;
     }
 }
