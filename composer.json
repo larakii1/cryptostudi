@@ -57,7 +57,8 @@
         "symfony/debug-bundle": "5.3.*",
         "symfony/phpunit-bridge": "^5.3",
         "symfony/stopwatch": "5.3.*",
-        "symfony/web-profiler-bundle": "5.3.*"
+        "symfony/web-profiler-bundle": "5.3.*",
+        "symfony/webpack-encore-bundle": "^1.12"
     },
     "config": {
         "optimize-autoloader": true,
