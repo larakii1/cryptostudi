@@ -49,30 +49,6 @@ class TransactionService
 
     public function injection_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
-
-
-
-
-        /* $params = $this->client->toArray()["data"];
-        foreach ($params as $cryptoApi) {
-            $crypto = $em->getRepository(Crypto::class)->findOneBy([
-                "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
-            ]);
-            $crypto->setPrice($cryptoApi['quote']['EUR']['price']);
-
-            $em->flush();
-
-            $variation = new PriceVariation;
-            $variation->setCrypto($crypto);
-            $variation->setPrice($cryptoApi['quote']['EUR']['price']);
-            $variation->setDate(new \DateTime());
-            $em->persist($variation);
-            $em->flush();
-        }*/
-
-
-
-
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
