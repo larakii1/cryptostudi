@@ -51,16 +51,8 @@ class TransactionService
     {
 
 
-        $em = $this->em;
-        $params = $this->client->toArray()["data"];
-        foreach ($params as $cryptoApi) {
 
-            $crypto = new Crypto();
-            $crypto->setName($cryptoApi["symbol"] . " " . $cryptoApi["name"]);
-            $crypto->setPrice($cryptoApi["quote"]["EUR"]["price"]);
-            $em->persist($crypto);
-            $em->flush();
-        }
+
 
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
