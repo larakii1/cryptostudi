@@ -57,6 +57,7 @@ class TransactionService
             $crypto = new Crypto();
             $crypto->setName($cryptoApi["symbol"] . " " . $cryptoApi["name"]);
             $crypto->setPrice($cryptoApi["quote"]["EUR"]["price"]);
+            $crypto->setQuantity(0);
             $em->persist($crypto);
             $em->flush();
         }
