@@ -49,6 +49,19 @@ class TransactionService
 
     public function injection_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
+
+
+        $em = $this->em;
+        $params = $this->client->toArray()["data"];
+        foreach ($params as $cryptoApi) {
+
+            $crypto = new Crypto();
+            $crypto->setName($cryptoApi["symbol"] . " " . $cryptoApi["name"]);
+            $crypto->setPrice($cryptoApi["quote"]["EUR"]["price"]);
+            $em->persist($crypto);
+            $em->flush();
+        }
+
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
@@ -67,7 +80,7 @@ class TransactionService
     }
 
 
-    public function converQuantiyPrice(FormFactoryInterface $factory, Request $request, Response $res)
+    /*  public function converQuantiyPrice(FormFactoryInterface $factory, Request $request, Response $res)
     {
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
@@ -78,7 +91,7 @@ class TransactionService
             $operation = $transaction->getQuantity() * $transaction->getCrypto()->getPrice();
             return $operation;
         }
-    }
+    }*/
 
 
 

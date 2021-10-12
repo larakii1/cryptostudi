@@ -40,7 +40,7 @@ class AccueilService
     }
 
 
-    function variation(EntityManagerInterface $em)
+    /*function variation(EntityManagerInterface $em)
     {
         $params = $this->client->toArray()["data"];
         foreach ($params as $cryptoApi) {
@@ -58,7 +58,7 @@ class AccueilService
             $em->persist($variation);
             $em->flush();
         }
-    }
+    }*/
 
 
 
