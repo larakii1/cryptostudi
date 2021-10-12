@@ -42,6 +42,22 @@ class AccueilService
 
     function variation(EntityManagerInterface $em)
     {
+        $params = $this->client->toArray()["data"];
+        foreach ($params as $cryptoApi) {
+            $crypto = $em->getRepository(Crypto::class)->findOneBy([
+                "name" => $cryptoApi["symbol"] . " "  . $cryptoApi["name"]
+            ]);
+            $crypto->setPrice($cryptoApi['quote']['EUR']['price']);
+
+            $em->flush();
+
+            $variation = new PriceVariation;
+            $variation->setCrypto($crypto);
+            $variation->setPrice($cryptoApi['quote']['EUR']['price']);
+            $variation->setDate(new \DateTime());
+            $em->persist($variation);
+            $em->flush();
+        }
     }
 
 
