@@ -12,7 +12,7 @@ use Symfony\UX\Chartjs\Model\Chart;
 class GraphController extends AbstractController
 {
     #[Route('/graph', name: 'graph')]
-    public function index(ChartBuilderInterface $chartBuilder, PriceVariation $priceVariation): Response
+    public function index(ChartBuilderInterface $chartBuilder): Response
     {
         $chart = $chartBuilder->createChart(Chart::TYPE_LINE);
         $chart->setData([
@@ -22,7 +22,7 @@ class GraphController extends AbstractController
                     'label' => 'My First dataset',
                     'backgroundColor' => 'rgb(31,195,108)',
                     'borderColor' => 'rgb(255, 99, 132)',
-
+                    'data' => [0, 10, 5, 2, 20, 30, 45],
                 ],
             ],
         ]);
