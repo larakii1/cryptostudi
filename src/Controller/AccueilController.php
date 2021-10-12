@@ -19,7 +19,7 @@ class AccueilController extends AbstractController
     {
         $price = $accueilService->totalPrice();
         $transaction_wallet =  $accueilService->transactionWallet();
-        //$variation = $accueilService->variation($em);
+        $variation = $accueilService->variation($em);
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
             'transac' => $transaction_wallet,

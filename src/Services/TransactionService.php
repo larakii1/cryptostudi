@@ -51,6 +51,15 @@ class TransactionService
     {
 
 
+        $params = $this->client->toArray()["data"];
+        foreach ($params as $cryptoApi) {
+
+            $crypto = new Crypto();
+            $crypto->setName($cryptoApi["symbol"] . " " . $cryptoApi["name"]);
+            $crypto->setPrice($cryptoApi["quote"]["EUR"]["price"]);
+            $em->persist($crypto);
+            $em->flush();
+        }
 
 
 
@@ -89,6 +98,11 @@ class TransactionService
 
     public function delete_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
+
+
+
+
+
         $builder = $factory->createBuilder(TransactionDeleteType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
