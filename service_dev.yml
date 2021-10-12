@@ -1,0 +1,10 @@
+services:
+    # This part is important!
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # Use the namespace where your fixtures are
+    AppBundle\Development\DataFixtures\:
+        resource: '../../src/AppBundle/Development/DataFixtures'
