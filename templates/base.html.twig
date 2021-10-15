@@ -7,7 +7,7 @@
 			{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-				           and uncomment the following Encore helpers to start using Symfony UX #}
+																           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			{#{{ encore_entry_link_tags('app') }}#}
 		{% endblock %}
@@ -17,6 +17,12 @@
 		{% endblock %}
 	</head>
 	<body>
-		{% block body %}{% endblock %}
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-succes">{{message}}</div>
+			{{% endfor %}}
+
+
+			{% block body %}{% endblock %}
+		</body>
 	</body>
 </html>

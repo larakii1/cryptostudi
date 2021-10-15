@@ -7,7 +7,7 @@ use App\Entity\Crypto;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
@@ -32,8 +32,10 @@ class TransactionType extends AbstractType
             )
             ->add(
                 'quantity',
-                TextType::class,
-                []
+                NumberType::class,
+                [
+                    "invalid_message" => "test",
+                ]
             )
 
             ->add(

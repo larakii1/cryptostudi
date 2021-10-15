@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class AccueilController extends AbstractController
 {
@@ -15,15 +16,16 @@ class AccueilController extends AbstractController
     {
     }
     #[Route('/', name: 'accueil')]
-    public function index(AccueilService $accueilService, EntityManagerInterface $em)
+    public function index(AccueilService $accueilService, EntityManagerInterface $em, UrlGeneratorInterface $urlGenerator)
     {
+
         $price = $accueilService->totalPrice();
         $transaction_wallet =  $accueilService->transactionWallet();
         $variation = $accueilService->variation($em);
         return $this->render('accueil/index.html.twig', [
             'controller_name' => 'AccueilController',
             'transac' => $transaction_wallet,
-            'price' => $price
+            'price' => $price,
 
         ]);
     }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TransactionRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TransactionRepository::class)
@@ -25,6 +26,7 @@ class Transaction
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\GreaterThan(value=0, message="la quantité doit être supérieur a {{value}} vous avez entrés {{compared_value}}")
      */
     private $quantity;
 

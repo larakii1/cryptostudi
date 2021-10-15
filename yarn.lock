@@ -1584,6 +1584,11 @@ chartjs-color@^2.1.0:
     chartjs-color-string "^0.6.0"
     color-convert "^1.9.3"
 
+choco@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/choco/-/choco-0.2.1.tgz#6ab6f2fb3a281eefdd619c652cb90b36861e42af"
+  integrity sha1-arby+zooHu/dYZxlLLkLNoYeQq8=
+
 chokidar@^3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.2.tgz#dba3976fcadb016f66fd365021d91600d01c1e75"

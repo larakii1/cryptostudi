@@ -3,7 +3,6 @@
 	<head>
 		<title>Transaction</title>
 		<meta charset="utf-8"/>
-		<link rel="styleshet" type="text/css" href="../transaction/stylesheet.css"/>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
 	</head>
@@ -23,6 +22,13 @@
 				body {
 					background-color: rgb(16, 15, 15);
 				}
+
+				@media(min-width:375px) {
+					#test #transaction_quantity {
+						height: 100px;
+					}
+
+				}
 			</style>
 		{% endblock %}
 
@@ -36,15 +42,22 @@
 
 				{{form_row(formView.crypto)}}
 			</div>
-			<div class="form-group col-lg-8 offset-md-2">
 
-				{{form_widget(formView.quantity,{'attr':{
-				'class':'form-control form-control-lg bg-secondary',
+
+			<div id="test" class="form-group col-lg-8 offset-md-2">
+
+				{{form_widget(formView.quantity,{
+					
+					'invalid_message':'test',
+					'attr':{
+				'class':'form-control form-control-lg bg-secondary is-invalid',
 				'placeholder':'quantity'
 			}})}}
 
+				<div class="invalid-feedback"></div>
 				<p>{{form_errors(formView.quantity)}}</p>
 			</div>
+
 
 			<div class="form-group col-lg-8 offset-md-2">
 
@@ -54,6 +67,8 @@
 				'required':false,
 				
 			}})}}
+				<div class="invalid-feedback">
+					hola</div>
 				{{form_errors(formView.price)}}
 			</div>
 
@@ -72,9 +87,9 @@
 		</div>
 
 
-		{% block javascript %}
-			<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-			<script></script>
-		{% endblock %}
+		{% block javascript %}{% endblock %}
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
 	</body>
 </html>

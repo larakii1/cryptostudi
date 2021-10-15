@@ -52,14 +52,20 @@ class TransactionService
 
 
 
-
+        $err =        $validator->validate([
+            new GreaterThan([
+                'value' => 0,
+                'message' => "la quantité doit être supérieur a {{value}} , vous avez choisis {{value}}"
+            ])
+        ]);
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
         $form->handleRequest($request);
         $transaction = $form->getData();
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $crypto = $form->get('crypto')->getData();
             $crypto->setQuantity($crypto->getQuantity() + $form->get('quantity')->getData());
             $em->persist($transaction);
