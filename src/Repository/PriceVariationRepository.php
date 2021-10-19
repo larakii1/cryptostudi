@@ -19,6 +19,38 @@ class PriceVariationRepository extends ServiceEntityRepository
         parent::__construct($registry, PriceVariation::class);
     }
 
+
+
+    public function getTotalPriceVariation()
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+        $price = ' SELECT round(sum(quantity * PV.price )) as total FROM price_variation as PV inner join crypto as c on PV.crypto_id = c.id group by PV.date';
+        $stmt = $conn->prepare($price);
+        $stmt->executeQuery();
+        return $stmt->fetchAll();
+    }
+
+    public function queryDate()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $date = 'SELECT DISTINCT pv.date from price_variation as pv';
+        $stmt = $conn->prepare($date);
+        $stmt->executeQuery();
+        return $stmt->fetchAll();
+    }
+
+    public function queryLastVariation($id)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $price = ' SELECT price from price_variation where crypto_id =' . $id . " ORDER BY crypto_id desc limit 1,1";
+        $stmt = $conn->prepare($price);
+        $stmt->executeQuery();
+        return $stmt->fetchOne();
+    }
+
+
+
     // /**
     //  * @return PriceVariation[] Returns an array of PriceVariation objects
     //  */

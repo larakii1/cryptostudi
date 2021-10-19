@@ -52,12 +52,6 @@ class TransactionService
 
 
 
-        $err =        $validator->validate([
-            new GreaterThan([
-                'value' => 0,
-                'message' => "la quantité doit être supérieur a {{value}} , vous avez choisis {{value}}"
-            ])
-        ]);
         $builder = $factory->createBuilder(TransactionType::class);
         $form = $builder->getForm();
         $formView = $form->createView();
@@ -76,26 +70,8 @@ class TransactionService
         return $formView;
     }
 
-
-    /*  public function converQuantiyPrice(FormFactoryInterface $factory, Request $request, Response $res)
-    {
-        $builder = $factory->createBuilder(TransactionType::class);
-        $form = $builder->getForm();
-        $form->handleRequest($request);
-        $transaction = $form->getData();
-
-        if ($transaction->getCrypto()) {
-            $operation = $transaction->getQuantity() * $transaction->getCrypto()->getPrice();
-            return $operation;
-        }
-    }*/
-
-
-
     public function delete_Transaction(FormFactoryInterface $factory, EntityManagerInterface $em, Request $request, ValidatorInterface $validator, CryptoRepository $cr)
     {
-
-
 
 
 
@@ -105,9 +81,14 @@ class TransactionService
         $form->handleRequest($request);
         $transaction = $form->getData();
 
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $crypto = $form->get('crypto')->getData();
-            $crypto->setQuantity($crypto->getQuantity() - $form->get('quantity')->getData());
+            if ($form->get('quantity')->getData() > $crypto->getQuantity()) {
+                $crypto->setQuantity(0);
+            } else {
+                $crypto->setQuantity($crypto->getQuantity() - $form->get('quantity')->getData());
+            }
+
             $em->persist($transaction);
             $em->persist($crypto);
             $em->flush();

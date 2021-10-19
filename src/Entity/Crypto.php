@@ -44,7 +44,7 @@ class Crypto
      */
     private $priceVariations;
 
-
+    private $variation;
 
     public function __construct()
     {
@@ -77,6 +77,18 @@ class Crypto
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getVariation(): ?float
+    {
+        return $this->variation;
+    }
+
+    public function setVariation(float $variation): self
+    {
+        $this->variation = $variation;
 
         return $this;
     }

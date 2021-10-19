@@ -18,7 +18,7 @@ class PriceVariation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=crypto::class, inversedBy="priceVariations")
+     * @ORM\ManyToOne(targetEntity=Crypto::class, inversedBy="priceVariations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $crypto;

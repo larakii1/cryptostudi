@@ -2,11 +2,42 @@
 <!DOCTYPE>
 <html>
 	<body>
-		{{ render_chart(chart) }}
+
+		<style>
+
+			@media(min-width:1920px) {
+				.chart {
+					width: 60%
+				}
+			}
+		</style>
+
+		<canvas id="myChart" width="400" height="400"></canvas>
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			<script>
+				var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+type: 'line',
+data: {
+labels: {{ labels }},
+datasets: [
+{
+label: 'Cours gain',
+data: {{ data }},
+backgroundColor: "rgb(31, 195, 108)",
+borderColor: 'rgb(255, 99, 132)'
+
+}
+]
+},
+options: {}
+});
+			</script>
 		{% endblock %}
+
+
 	</body>
 
 </html>

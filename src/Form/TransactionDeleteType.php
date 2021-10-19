@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class TransactionDeleteType extends AbstractType
 {
@@ -32,7 +33,7 @@ class TransactionDeleteType extends AbstractType
             )
             ->add(
                 'quantity',
-                TextType::class,
+                NumberType::class,
                 []
             )
             ->add(

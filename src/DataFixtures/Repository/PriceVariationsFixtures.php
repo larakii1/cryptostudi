@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Services;
+namespace App\DataFixtures\Repository;
 
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Entity\Crypto;
 use App\Entity\PriceVariation;
-use App\Repository\CryptoRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class AccueilService
+class PriceVariationsFixtures extends Fixture
 {
-    private $cryptoRepository;
+
     private $client;
-    private $em;
-    public function __construct(CryptoRepository $cryptoRepository, HttpClientInterface $client, EntityManagerInterface $em)
+    public function __construct(HttpClientInterface $client)
     {
-        $this->cryptoRepository = $cryptoRepository;
-        $this->em = $em;
-        /*  $this->client =
+        $this->client =
             $client->request(
                 "GET",
                 "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
@@ -29,18 +27,17 @@ class AccueilService
 
                     'query' => [
                         'limit' => 10,
-                        'convert' => 'EUR',
-
-
+                        'convert' => 'EUR'
                     ]
 
 
                 ]
-            );*/
+            );
     }
 
 
-    /*  function variation(EntityManagerInterface $em)
+    public function load(ObjectManager $em)
+
     {
         $params = $this->client->toArray()["data"];
         foreach ($params as $cryptoApi) {
@@ -58,24 +55,5 @@ class AccueilService
             $em->persist($variation);
             $em->flush();
         }
-    }*/
-
-
-
-    public function transactionWallet()
-    {
-        $cryptoRepository = $this->cryptoRepository;
-        return $cryptoRepository->findAll();
-    }
-
-    public function totalPrice()
-    {
-
-
-        $cryptoRepository = $this->cryptoRepository;
-        $price = $cryptoRepository->getTotalPrice()[0];
-
-
-        return $price;
     }
 }

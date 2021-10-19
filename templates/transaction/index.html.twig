@@ -4,7 +4,6 @@
 		<title>Transaction</title>
 		<meta charset="utf-8"/>
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
 	</head>
 	<body>
 		{% block style %}
@@ -23,11 +22,10 @@
 					background-color: rgb(16, 15, 15);
 				}
 
-				@media(min-width:375px) {
-					#test #transaction_quantity {
-						height: 100px;
-					}
 
+				#transaction_ajouter {
+					position: relative;
+					top: 80%;
 				}
 			</style>
 		{% endblock %}
@@ -35,7 +33,7 @@
 		<div class="transaction">
 			<h1>Ajouter une transaction</h1>
 		</div>
-		<div class="container  ">
+		<div class="container">
 
 			{{form_start(formView)}}
 			<div class="form-group col-lg-8 offset-md-2 ">
@@ -48,13 +46,11 @@
 
 				{{form_widget(formView.quantity,{
 					
-					'invalid_message':'test',
 					'attr':{
-				'class':'form-control form-control-lg bg-secondary is-invalid',
+				'class':'form-control form-control-lg bg-secondary',
 				'placeholder':'quantity'
 			}})}}
 
-				<div class="invalid-feedback"></div>
 				<p>{{form_errors(formView.quantity)}}</p>
 			</div>
 
@@ -67,29 +63,57 @@
 				'required':false,
 				
 			}})}}
-				<div class="invalid-feedback">
-					hola</div>
-				{{form_errors(formView.price)}}
+
+
 			</div>
 
-			<div class="form-group ">
-
-				{{form_widget(formView.ajouter,{'attr':{
-				'class':"btn btn-primary"
+			<div class="row justify-content-center">
+				<div class="col-2">
+					{{form_widget(formView.ajouter,{'attr':{
+				'class':"btn btn-primary col-xl-12 col-xs-12"
 				
-			}})}}
-
+			}})}}</div>
 			</div>
-
-			{{form_end(formView)}}
-
 
 		</div>
 
-
-		{% block javascript %}{% endblock %}
+		{{form_end(formView)}}
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+		<script>
+			let transaction_quantity = $("#transaction_quantity");
+let transaction_price = $("#transaction_price");
+$(transaction_quantity).keyup(function () {
+let id_transaction_crypto = $("#transaction_crypto").val();
+$.ajax({
+method: "POST",
+url:"{{ path('convert') }}",
+data: {
+id: id_transaction_crypto,
+quantity: $(this).val()
+},
+success: function (response) {
+transaction_price.val(response);
+}
+})
+})
 
+$(transaction_price).keyup(function () {
+let id_transaction_crypto = $("#transaction_crypto").val();
+$.ajax({
+method: "POST",
+url:"{{ path('price') }}",
+data: {
+id: id_transaction_crypto,
+price: $(this).val()
+},
+success: function (response) {
+transaction_quantity.val(response);
+
+}
+})
+})
+		</script>
 	</body>
 </html>
