@@ -28,6 +28,7 @@ class TransactionDeleteType extends AbstractType
                     'choice_label' => function (Crypto $crypto) {
                         return $crypto->getName() . " " . $crypto->getQuantity();
                     },
+                    'label' => false
 
                 ]
             )

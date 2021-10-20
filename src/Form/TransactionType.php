@@ -27,6 +27,7 @@ class TransactionType extends AbstractType
                     'choice_label' => function (Crypto $crypto) {
                         return $crypto->getName();
                     },
+                    'label' => false
 
                 ]
             )

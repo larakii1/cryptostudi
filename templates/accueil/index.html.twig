@@ -8,8 +8,9 @@
 
 	<style>
 		h1 {
-			text-align: center;
+
 			color: rgb(239, 239, 239);
+			font-size: 50px;
 		}
 
 		.list-group-item {
@@ -27,12 +28,16 @@
 		}
 
 		.back {
-
+			display: flex;
 			height: 170px;
 			width: 100%;
 			background: url("https://photos.lci.fr/images/1280/720/bitcoin-851-00b03f-0@1x.jpeg") no-repeat;
 			background-size: cover;
+			align-items: center;
+			justify-content: center;
 		}
+
+
 		svg {
 			position: relative;
 			left: 1%
@@ -40,7 +45,7 @@
 	</style>
 	<body>
 		<div class="back">
-			<h1>
+			<h1>Solde:
 				{% for prices in price %}
 					{{prices}}
 				{% endfor %}
