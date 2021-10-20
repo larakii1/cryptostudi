@@ -5,36 +5,56 @@
 
 		<style>
 
-			@media(min-width:1920px) {
-				.chart {
-					width: 60%
-				}
+
+			#myChart {
+				width: 90% !important;
+				height: 40% !important;
+			}
+
+			.space {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 		</style>
+		<div class="space">
+			<canvas id="myChart"></canvas>
+		</div>
 
-		<canvas id="myChart" width="400" height="400"></canvas>
 
 		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
+			<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 			<script>
-				var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-type: 'line',
-data: {
-labels: {{ labels }},
+
+				const labels = {{ labels|raw }};
+
+const data = {
+labels: labels,
 datasets: [
 {
 label: 'Cours gain',
 data: {{ data }},
 backgroundColor: "rgb(31, 195, 108)",
-borderColor: 'rgb(255, 99, 132)'
+borderColor: 'rgb(255, 99, 132)',
+fill: true
+
 
 }
 ]
-},
+};
+
+const config = {
+type: 'line',
+data,
 options: {}
-});
+};
+
+
+var myChart = new Chart(document.getElementById('myChart'), config);
 			</script>
+
 		{% endblock %}
 
 
