@@ -51,7 +51,7 @@ class TransactionController extends AbstractController
             ]
         );
 
-        $montant = $crypto->getPrice() * (int)$quanity;
+        $montant = round($crypto->getPrice(), 2)  * (int)$quanity . " €";
         return new Response($montant);
     }
 

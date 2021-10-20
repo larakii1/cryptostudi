@@ -33,9 +33,7 @@ class TransactionType extends AbstractType
             ->add(
                 'quantity',
                 NumberType::class,
-                [
-                    "invalid_message" => "test",
-                ]
+                []
             )
 
             ->add(
